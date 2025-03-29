@@ -2,7 +2,7 @@ from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-ENV_PATH: Path = Path(__file__).resolve().parent.parent.parent
+BASE_PATH: Path = Path(__file__).resolve().parent.parent
 
 
 class Settings(BaseSettings):
@@ -12,6 +12,8 @@ class Settings(BaseSettings):
     DB_HOST: str
     DB_PORT: int
 
+    UPLOADS_PATH: Path = BASE_PATH / "uploads"
+    CHUNK_SIZE: int = 1024 * 1024
     YANDEX_CLIENT_ID: str
     YANDEX_CLIENT_SECRET: str
     APP_SECRET_KEY: str
@@ -19,7 +21,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
     model_config = SettingsConfigDict(
-        env_file=ENV_PATH / ".env", env_file_encoding="utf-8"
+        env_file=BASE_PATH.parent / ".env", env_file_encoding="utf-8"
     )
 
 
