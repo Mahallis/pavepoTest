@@ -10,6 +10,5 @@ app.include_router(auth_router)
 
 conf.UPLOADS_PATH.mkdir(exist_ok=True)
 
-
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
