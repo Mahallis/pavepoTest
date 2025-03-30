@@ -1,10 +1,24 @@
 volumes:
   postgres_data:
+  uploads:
 
 services:
+  app:
+    build:
+      context: ./app/
+      dockerfile: Dockerfile
+    container_name: audio_app
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - uploads:/app/uploads
+    depends_on:
+      - db
   db:
-    container_name: audio_db
     image: postgres:16
+    container_name: audio_db
     restart: always
     env_file: .env
     environment:
@@ -15,9 +29,3 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    networks:
-      - custom
-
-networks:
-  custom:
-    driver: bridge
