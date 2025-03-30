@@ -5,7 +5,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 BASE_PATH: Path = Path(__file__).resolve().parent.parent
 
 
-class Settings(BaseSettings):
+class Config(BaseSettings):
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
     POSTGRES_NAME: str
@@ -25,4 +25,4 @@ class Settings(BaseSettings):
     )
 
 
-settings = Settings()
+conf = Config()

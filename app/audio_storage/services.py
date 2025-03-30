@@ -1,4 +1,4 @@
-from config.general import settings as conf
+from config.general import conf
 
 
 async def save_file(file, filename):
